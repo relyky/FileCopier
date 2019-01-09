@@ -14,21 +14,23 @@
 1. void RefreshStatusOfUI()  
 2. void LogMessage(string format, params object[] args)
 
-  protected void RefreshStatusOfUI()
-  {
-  	// Don't do anything if the form's handle hasn't been created 
-  	// or the form has been disposed.
-  	if (!this.IsHandleCreated || this.IsDisposed) return;
-  	
-  	// Invoke an anonymous method on the thread of the form.
-  	this.Invoke((MethodInvoker)delegate
-  	{
-  		// 更新結果
-  		this.txtFileCounter.Text = string.Format("{0:N0}", _fileCounter);
-  		this.txtDirCounter.Text = string.Format("{0:N0}", _dirCounter);
-  		this.lblCopyFileCounter.Text = string.Format("{0:N0}", _copyFileCounter);
-  		this.lblCopyDirCounter.Text = string.Format("{0:N0}", _copyDirCounter);
-  		this.prgCopyFile.Value = Math.Min(prgCopyFile.Maximum, _copyFileCounter);
-  		this.prgCopyDir.Value = Math.Min(prgCopyDir.Maximum, _copyDirCounter);
-  	});
-  }
+<pre>
+protected void RefreshStatusOfUI()
+{
+	// Don't do anything if the form's handle hasn't been created 
+	// or the form has been disposed.
+	if (!this.IsHandleCreated || this.IsDisposed) return;
+	
+	// Invoke an anonymous method on the thread of the form.
+	this.Invoke((MethodInvoker)delegate
+	{
+		// 更新結果
+		this.txtFileCounter.Text = string.Format("{0:N0}", _fileCounter);
+		this.txtDirCounter.Text = string.Format("{0:N0}", _dirCounter);
+		this.lblCopyFileCounter.Text = string.Format("{0:N0}", _copyFileCounter);
+		this.lblCopyDirCounter.Text = string.Format("{0:N0}", _copyDirCounter);
+		this.prgCopyFile.Value = Math.Min(prgCopyFile.Maximum, _copyFileCounter);
+		this.prgCopyDir.Value = Math.Min(prgCopyDir.Maximum, _copyDirCounter);
+	});
+}
+</pre>
