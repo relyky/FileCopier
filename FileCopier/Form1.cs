@@ -75,6 +75,12 @@ namespace FileCopier
                     return;
                 }
 
+                if (_config.ignoreList == null)
+                {
+                    LogMessage("無忽略清單不予執行。");
+                    return;
+                }
+                    
                 // GO
 
                 // prefix 先計算數量
@@ -116,6 +122,87 @@ namespace FileCopier
         protected async void ProceedCopyDirectoryAsync()
         {
             await Task.Run(() => ProceedCopyDirectory());
+        }
+
+        protected void ProceedCopyAllowList()
+        {
+            DateTime beginTime = DateTime.Now;
+            LogMessage("## 開始複製同意清單…");
+            LogMessage("選取組態：{0}", _config.idName);
+            LogMessage("來源目錄：{0}", _config.sourceDir);
+            LogMessage("目的目錄：{0}", _config.targetDir);
+
+            // 重設執行狀態
+            _fileCounter = 0;
+            _dirCounter = 0;
+            _copyFileCounter = 0;
+            _copyDirCounter = 0;
+
+            try
+            {
+                DirectoryInfo sourceDir = new DirectoryInfo(_config.sourceDir);
+                DirectoryInfo targetDir = new DirectoryInfo(_config.targetDir);
+                if (!sourceDir.Exists)
+                {
+                    LogMessage("來源目錄不存在！");
+                    return;
+                }
+
+                if (!targetDir.Exists)
+                {
+                    LogMessage("目的目錄不存在！");
+                    return;
+                }
+
+                if (_config.allowList == null)
+                {
+                    LogMessage("無同意清單不予執行。");
+                    return;
+                }
+
+                // GO
+
+                // prefix 先計算數量
+                SetupUIMode_Count();
+
+                // 先計算數量
+                _fileCounter = _config.allowList.Count;
+
+                RefreshStatusOfUI();
+
+                // 只計算數量
+                if (_countOnly) return;
+
+                // prefix 再複製檔案
+                SetupUIMode_Copy();
+
+                // 再複製檔案
+                DoCopyAllowList(sourceDir, targetDir);
+
+                RefreshStatusOfUI();
+            }
+            catch (Exception ex)
+            {
+                LogMessage("--------------------------------------------");
+                LogMessage("## 出現錯誤！");
+                LogMessage(ex.Message);
+                LogMessage(ex.StackTrace);
+            }
+            finally
+            {
+                LogMessage("## 複製同意清單完成。");
+                LogMessage("檔案數量：{0}", _fileCounter);
+                LogMessage("目錄數量：{0}", _dirCounter);
+                LogMessage("複製檔案：{0}", _copyFileCounter);
+                LogMessage("複製目錄：{0}", _copyDirCounter);
+                LogMessage("執行時間：{0:hh\\:mm\\:ss}", DateTime.Now.Subtract(beginTime));
+                LogMessage("============================================");
+            }
+        }
+
+        protected async void ProceedCopyAllowListAsync()
+        {
+            await Task.Run(() => ProceedCopyAllowList());
         }
 
         /// <summary>
@@ -186,6 +273,61 @@ namespace FileCopier
             finally
             {
                 if (_showDetail) this.LogMessage("已複製目錄 [{0}]", sourceDir.FullName);
+            }
+        }
+
+        /// <summary>
+        /// 複製同意清單檔案
+        /// </summary>
+        protected void DoCopyAllowList(DirectoryInfo sourceDir, DirectoryInfo targetDir)
+        {
+            try
+            {
+                foreach (string filename in _config.allowList)
+                {
+                    // 若以“\”結尾則視為目錄
+                    if (filename.EndsWith("\\"))
+                    {
+                        //## copy direcotry
+                        DirectoryInfo dirSource = new DirectoryInfo(sourceDir.FullName + filename);
+                        DirectoryInfo dirTarget = new DirectoryInfo(targetDir.FullName + filename);
+
+                        //if (_showDetail)
+                        LogMessage("copy directory {0}\r\n  to {1}", dirSource.FullName, dirTarget.FullName); // trace
+
+                        FileCopierBiz.DirectoryCopy(dirSource.FullName, dirTarget.FullName, true);
+                        _copyFileCounter++;
+
+                        RefreshStatusOfUI();
+                    }
+                    else
+                    {
+                        //## copy file
+                        FileInfo sourceFile = new FileInfo(sourceDir.FullName + filename);
+                        FileInfo targetFile = new FileInfo(targetDir.FullName + filename);
+
+                        // 若檔案不存在，則跳過。
+                        if (!sourceFile.Exists)
+                        {
+                            LogMessage("NOT EXISTS {0}", sourceFile.FullName); // trace
+                            continue;
+                        }
+
+                        if (_showDetail) LogMessage("copy {0}\r\n  to {1}", sourceFile.FullName, targetFile.FullName); // trace
+
+                        if (!targetFile.Directory.Exists)
+                            targetFile.Directory.Create();
+
+                        File.Copy(sourceFile.FullName, targetFile.FullName, true);
+                        _copyFileCounter++;
+
+                        RefreshStatusOfUI();
+                    }
+                }
+            }
+            finally
+            {
+                if (_showDetail) this.LogMessage("已複製同意清單");
             }
         }
 
@@ -319,6 +461,7 @@ namespace FileCopier
             this.txtSourceDir.Text = cfg.sourceDir;
             this.txtTargetDir.Text = cfg.targetDir;
             this.lstIgnoreList.DataSource = cfg.ignoreList;
+            this.lstAllowList.DataSource = cfg.allowList;
         }
 
         private void btnRun_Click(object sender, EventArgs e)
@@ -338,6 +481,8 @@ namespace FileCopier
             //# 開始
             this.ProceedCopyDirectoryAsync();
             //this.ProceedCopyDirectory();
+
+            this.ProceedCopyAllowListAsync();
         }
 
     }

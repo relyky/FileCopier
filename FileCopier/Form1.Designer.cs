@@ -46,6 +46,8 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.lblCopyDirCounter = new System.Windows.Forms.Label();
             this.lblCopyFileCounter = new System.Windows.Forms.Label();
             this.prgCopyDir = new System.Windows.Forms.ProgressBar();
@@ -54,8 +56,8 @@
             this.lblDirCounter = new System.Windows.Forms.Label();
             this.lblFileCounter = new System.Windows.Forms.Label();
             this.prgCopyFile = new System.Windows.Forms.ProgressBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lstAllowList = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -105,7 +107,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 171);
+            this.label5.Location = new System.Drawing.Point(38, 187);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 16);
@@ -158,11 +160,13 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(872, 563);
+            this.tabControl1.Size = new System.Drawing.Size(833, 563);
             this.tabControl1.TabIndex = 9;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lstAllowList);
+            this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.chkCountOnly);
             this.tabPage1.Controls.Add(this.chkShowDetail);
             this.tabPage1.Controls.Add(this.btnRun);
@@ -179,7 +183,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(864, 533);
+            this.tabPage1.Size = new System.Drawing.Size(825, 533);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "組態";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -187,7 +191,7 @@
             // chkCountOnly
             // 
             this.chkCountOnly.AutoSize = true;
-            this.chkCountOnly.Location = new System.Drawing.Point(147, 346);
+            this.chkCountOnly.Location = new System.Drawing.Point(147, 408);
             this.chkCountOnly.Name = "chkCountOnly";
             this.chkCountOnly.Size = new System.Drawing.Size(107, 20);
             this.chkCountOnly.TabIndex = 15;
@@ -197,7 +201,7 @@
             // chkShowDetail
             // 
             this.chkShowDetail.AutoSize = true;
-            this.chkShowDetail.Location = new System.Drawing.Point(288, 346);
+            this.chkShowDetail.Location = new System.Drawing.Point(288, 408);
             this.chkShowDetail.Name = "chkShowDetail";
             this.chkShowDetail.Size = new System.Drawing.Size(91, 20);
             this.chkShowDetail.TabIndex = 14;
@@ -206,7 +210,7 @@
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(147, 372);
+            this.btnRun.Location = new System.Drawing.Point(147, 434);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(124, 39);
             this.btnRun.TabIndex = 12;
@@ -218,9 +222,9 @@
             // 
             this.lstIgnoreList.FormattingEnabled = true;
             this.lstIgnoreList.ItemHeight = 16;
-            this.lstIgnoreList.Location = new System.Drawing.Point(147, 171);
+            this.lstIgnoreList.Location = new System.Drawing.Point(41, 206);
             this.lstIgnoreList.Name = "lstIgnoreList";
-            this.lstIgnoreList.Size = new System.Drawing.Size(308, 132);
+            this.lstIgnoreList.Size = new System.Drawing.Size(338, 180);
             this.lstIgnoreList.TabIndex = 9;
             // 
             // tabPage2
@@ -264,6 +268,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(858, 115);
             this.panel1.TabIndex = 15;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(23, 44);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(76, 16);
+            this.label7.TabIndex = 23;
+            this.label7.Text = " 複製目錄";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(23, 15);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 16);
+            this.label6.TabIndex = 22;
+            this.label6.Text = " 複製檔案";
             // 
             // lblCopyDirCounter
             // 
@@ -331,29 +353,30 @@
             this.prgCopyFile.Size = new System.Drawing.Size(594, 23);
             this.prgCopyFile.TabIndex = 14;
             // 
-            // label6
+            // label8
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(23, 15);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(76, 16);
-            this.label6.TabIndex = 22;
-            this.label6.Text = " 複製檔案";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(400, 187);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 16);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "同意清單";
             // 
-            // label7
+            // lstAllowList
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(23, 44);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(76, 16);
-            this.label7.TabIndex = 23;
-            this.label7.Text = " 複製目錄";
+            this.lstAllowList.FormattingEnabled = true;
+            this.lstAllowList.ItemHeight = 16;
+            this.lstAllowList.Location = new System.Drawing.Point(403, 206);
+            this.lstAllowList.Name = "lstAllowList";
+            this.lstAllowList.Size = new System.Drawing.Size(338, 180);
+            this.lstAllowList.TabIndex = 17;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(872, 563);
+            this.ClientSize = new System.Drawing.Size(833, 563);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -401,6 +424,8 @@
         private System.Windows.Forms.Label lblCopyFileCounter;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ListBox lstAllowList;
+        private System.Windows.Forms.Label label8;
     }
 }
 

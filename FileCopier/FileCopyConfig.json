@@ -4,9 +4,9 @@
   "configList": [
     {
       "idName": "測試組態１",
-      "description": "測試",
-      "sourceDir": "D:\\GitHub\\winformLab",
-      "targetDir": "E:\\Temp",
+      "description": "測試１",
+      "sourceDir": "D:\\GitHub\\FileCopier",
+      "targetDir": "D:\\Temp",
       "ignoreList": [
         "bin",
         "obj",
@@ -16,87 +16,14 @@
       ]
     },
     {
-      "idName": "SVN_MTNet2→GIT_MPB.MTNET.IM",
-      "description": "IM系統部署到CHT TFS之原始檔複製程序",
-      "sourceDir": "C:\\SVN_MTNet2\\M2App",
-      "targetDir": "C:\\SVN_TempIM",
-      "ignoreList": [
-        "MPB.MTNET.PM.Biz",
-        "MPB.MTNET.PM.Dto",
-        "MPB.MTNET.PM.Web",
-        "MPB.MTNET.VM.Biz",
-        "MPB.MTNET.VM.BusinessLogicLayer",
-        "MPB.MTNET.VM.DataAccessLayer",
-        "MPB.MTNET.VM.Dto",
-        "MPB.MTNET.VM.Parameter",
-        "MPB.MTNET.VM.Web",
-        "packages",
-        "M2App.sln",
-        "M2App.v12.suo",
-        "MPB.MTNET.PM.Web.sln",
-        "MPB.MTNET.VM.sln",
-        "readme.txt",
-        "node_modules",
-        "bin",
-        "obj",
-        ".vs",
-        ".git"
-      ]
-    },
-    {
-      "idName": "SVN_MTNet2→GIT_MPB.MTNET.PM",
-      "description": "PM系統部署到CHT TFS之原始檔複製程序",
-      "sourceDir": "C:\\SVN_MTNet2\\M2App",
-      "targetDir": "C:\\SVN_TempPM",
-      "ignoreList": [
-        "MPB.MTNET.IM.Biz",
-        "MPB.MTNET.IM.Dto",
-        "MPB.MTNET.IM.Web",
-        "MPB.MTNET.VM.Biz",
-        "MPB.MTNET.VM.BusinessLogicLayer",
-        "MPB.MTNET.VM.DataAccessLayer",
-        "MPB.MTNET.VM.Dto",
-        "MPB.MTNET.VM.Parameter",
-        "MPB.MTNET.VM.Web",
-        "packages",
-        "M2App.sln",
-        "M2App.v12.suo",
-        "MPB.MTNET.IM.Web.sln",
-        "MPB.MTNET.VM.sln",
-        "readme.txt",
-        "node_modules",
-        "bin",
-        "obj",
-        ".vs",
-        ".git"
-      ]
-    },
-    {
-      "idName": "SVN_MTNet2→GIT_MPB.MTNET.VM",
-      "description": "VM系統部署到CHT TFS之原始檔複製程序",
-      "sourceDir": "C:\\SVN_MTNet2\\M2App",
-      "targetDir": "C:\\SVN_TempVM",
-      "ignoreList": [
-        "MPB.MTNET.PM.Biz",
-        "MPB.MTNET.PM.Dto",
-        "MPB.MTNET.PM.Web",
-        "MPB.MTNET.IM.Biz",
-        "MPB.MTNET.IM.Dto",
-        "MPB.MTNET.IM.Web",
-        "MPB.MTNET.VM.BusinessLogicLayer",
-        "MPB.MTNET.VM.DataAccessLayer",
-        "MPB.MTNET.VM.Parameter",
-        "packages",
-        "M2App.sln",
-        "M2App.v12.suo",
-        "MPB.MTNET.PM.Web.sln",
-        "MPB.MTNET.IM.Web.sln",
-        "readme.txt",
-        "node_modules",
-        "bin",
-        "obj",
-        ".vs",
-        ".git"
+      "idName": "測試組態２",
+      "description": "測試２",
+      "sourceDir": "D:\\GitHub\\FileCopier",
+      "targetDir": "D:\\Temp",
+      "allowList": [
+        "\\FileCopier\\Properties\\AssemblyInfo.cs",
+        "\\FileCopier\\Properties\\Settings.Designer.cs",
+        "\\packages\\"
       ]
     }
   ]

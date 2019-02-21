@@ -20,5 +20,6 @@ namespace FileCopier
         public string sourceDir { get; set; }
         public string targetDir { get; set; }
         public List<string> ignoreList { get; set; }
+        public List<string> allowList { get; set; }
     }
 }
