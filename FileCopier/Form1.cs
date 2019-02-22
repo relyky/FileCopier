@@ -121,7 +121,10 @@ namespace FileCopier
 
         protected async void ProceedCopyDirectoryAsync()
         {
-            await Task.Run(() => ProceedCopyDirectory());
+            await Task.Run(() => {
+                ProceedCopyDirectory();
+                ProceedCopyAllowList();
+            });
         }
 
         protected void ProceedCopyAllowList()
@@ -200,10 +203,10 @@ namespace FileCopier
             }
         }
 
-        protected async void ProceedCopyAllowListAsync()
-        {
-            await Task.Run(() => ProceedCopyAllowList());
-        }
+        //protected async void ProceedCopyAllowListAsync()
+        //{
+        //    await Task.Run(() => ProceedCopyAllowList());
+        //}
 
         /// <summary>
         /// 計算檔案與目錄數量
@@ -482,7 +485,7 @@ namespace FileCopier
             this.ProceedCopyDirectoryAsync();
             //this.ProceedCopyDirectory();
 
-            this.ProceedCopyAllowListAsync();
+            //this.ProceedCopyAllowListAsync();
         }
 
     }
